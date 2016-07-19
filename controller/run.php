@@ -1,4 +1,3 @@
-w
 <?php
 
 include_once 'config.php';
@@ -28,10 +27,13 @@ foreach ($data as $server => $subarray) {
 		#echo $result;
 		$json = json_decode($result);
 		#print_r ($json);
-#		$json->status = "down";
+		$LEDcount = $dstdata['dstLEDcount'];
+		$LEDhalf = $LEDcount / 2;
+		$json->status = "down";
 		if($json->status != 'ok') {
-			$in_color = $color_nolink;
-			$out_color = $color_nolink;
+			#$in_color = $color_nolink;
+			#$out_color = $color_nolink;
+			$connection_data = "setup channel_1_count=$LEDcount;thread_start;do;fill 1,00FFFF;render;delay 100;fill 1,00FF00;render;delay 100;loop;thread_stop\n";
 		} // End if json->status
 		else {
 			$outRate = $json->port->ifOutOctets_rate;
@@ -49,13 +51,11 @@ foreach ($data as $server => $subarray) {
 				if($inPercent >= $percentage) $in_color = $hex;
 				if($outPercent >= $percentage) $out_color = $hex;
 			} // End foreach color
-		} // End else
-		$LEDcount = $dstdata['dstLEDcount'];
-		$LEDhalf = $LEDcount / 2;
 		
+			$connection_data = "setup channel_1_count=$LEDcount; fill 1,".$in_color.",0,$LEDhalf; fill 1,".$out_color.",".$LEDhalf.",$LEDhalf; render\n";
+		} // End else
 		$connection_url = "tcp://".$dstdata['dstserver'].":".$dstdata['dstport'];
 		$socket = stream_socket_client($connection_url);
-		$connection_data = "setup channel_1_count=$LEDcount; fill 1,".$in_color.",0,$LEDhalf; fill 1,".$out_color.",".$LEDhalf.",$LEDhalf; render\n";
 		fwrite($socket, $connection_data);
 		fclose($socket);
 
@@ -64,10 +64,6 @@ foreach ($data as $server => $subarray) {
 	} // End foreach subarray
 
 } // End foreach data
-
-
-
-
 
 
 curl_close($curl);
