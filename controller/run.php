@@ -33,7 +33,8 @@ foreach ($data as $server => $subarray) {
 		if($json->status != 'ok') {
 			#$in_color = $color_nolink;
 			#$out_color = $color_nolink;
-			$connection_data = "setup channel_1_count=$LEDcount;thread_start;do;fill 1,00FFFF;render;delay 100;fill 1,00FF00;render;delay 100;loop;thread_stop\n";
+#			$connection_data = "setup channel_1_count=$LEDcount;thread_start;do;fill 1,00FFFF;render;delay 100;fill 1,00FF00;render;delay 100;loop;thread_stop\n";
+			$connection_data = "setup channel_1_count=$LEDcount;fill 1,FF0000;render;\n";
 		} // End if json->status
 		else {
 			$outRate = $json->port->ifOutOctets_rate;
