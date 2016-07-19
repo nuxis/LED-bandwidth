@@ -11,5 +11,7 @@ $data['localhost']['eth0']['dstLEDcount'] = 50;
 // The number is the percentage usage for the color
 $color_nolink = "FF0000";
 $colors[0] = '0000FF';
+$colors[25] = '0070FF'
 $colors[50] = '00FFFF';
+$colors[75] = '00FF40'
 $colors[95] = '00FF00';
