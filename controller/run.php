@@ -48,8 +48,6 @@ foreach ($data as $server => $subarray) {
 			foreach ($colors AS $percentage => $hex) {
 				if($inPercent >= $percentage) $in_color = $hex;
 				if($outPercent >= $percentage) $out_color = $hex;
-				$out_color = "FF00FF";
-				$in_Color = "00FF00";
 			} // End foreach color
 		} // End else
 		$LEDcount = $dstdata['dstLEDcount'];
