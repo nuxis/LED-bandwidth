@@ -1,0 +1,15 @@
+## Remember to use correct HEX values for your LEDs
+# Set the length of the chain.
+setup channel_1_count=50 
+
+# Set color to GREEN when 0% load
+fill 1,0000FF
+render 
+
+# Set color to YELLOW when 50% load
+fill 1,00FFFF
+render
+
+# Set color to RED when 100% load
+fill 1,00FF00
+render
